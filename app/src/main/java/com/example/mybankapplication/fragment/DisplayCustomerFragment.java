@@ -1,7 +1,8 @@
-package com.example.mybankapplication;
+package com.example.mybankapplication.fragment;
 
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +14,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mybankapplication.R;
+import com.example.mybankapplication.SharedPreferencesManager;
+import com.example.mybankapplication.activities.EditCustomerActivity;
+import com.example.mybankapplication.activities.MainActivity;
 import com.example.mybankapplication.adapter.AdapterCustomer;
 import com.example.mybankapplication.models.Customer;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 
@@ -22,11 +28,14 @@ public class DisplayCustomerFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterCustomer customerAdapter;
     private ArrayList<Customer>myCustomerList=new ArrayList<>();
+    private FloatingActionButton fab;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
 
@@ -43,6 +52,14 @@ public class DisplayCustomerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myCustomerList=new ArrayList<Customer>(SharedPreferencesManager.getInstance(DisplayCustomerFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY));
         recyclerView=view.findViewById(R.id.recyclerViewListCustomers);
+        fab=view.findViewById(R.id.floating);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(DisplayCustomerFragment.this.getContext(), EditCustomerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setViewItem();
 

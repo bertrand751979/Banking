@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:strokeColor="#588DF8"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="10dp"
+        android:layout_marginBottom="2dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <TextView
+                android:id="@+id/rawOperationDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:layout_marginLeft="10dp"/>
+
+            <TextView
+                android:id="@+id/rawAmountOperation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Montant"
+                android:textSize="14sp"
+                android:textColor="@color/teal_700"
+                android:textStyle="bold"
+                android:layout_marginLeft="60dp"/>
+
+            <TextView
+                android:id="@+id/rawChoiceOperation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Retrait/Depot"
+                android:textSize="14sp"
+                android:textColor="#D50808"
+                android:textStyle="bold"
+                android:layout_marginLeft="60dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:layout_marginTop="30dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Numero de compte:"
+                android:textSize="12sp"
+                android:textColor="@color/black"
+                android:layout_marginLeft="20dp"/>
+
+            <TextView
+                android:id="@+id/rawOperationID"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="098765444444"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="@color/purple_700"
+                android:layout_marginLeft="5dp"/>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</RelativeLayout>

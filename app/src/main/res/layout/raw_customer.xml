@@ -8,9 +8,9 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:strokeColor="@color/black"
-        app:strokeWidth="5dp"
-        app:cardCornerRadius="17dp"
+        app:strokeColor="#5E5A5A"
+        app:strokeWidth="2dp"
+        app:cardCornerRadius="10dp"
         android:layout_margin="7dp">
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
             android:textSize="14sp"
             android:textColor="@color/black"
             android:textStyle="italic"
-            android:layout_marginLeft="50dp"/>
+            android:layout_marginLeft="9dp"/>
 
     </LinearLayout>
         <LinearLayout
@@ -51,16 +51,17 @@
                 android:text="Numero de compte:"
                 android:textSize="12sp"
                 android:textColor="@color/black"
-                android:layout_marginLeft="25dp"/>
+                android:layout_marginLeft="20dp"/>
 
         <TextView
             android:id="@+id/rawCustomerID"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="098765444444"
+            android:textStyle="bold"
             android:textSize="12sp"
-            android:textColor="@color/black"
-            android:layout_marginLeft="50dp"/>
+            android:textColor="@color/purple_700"
+            android:layout_marginLeft="5dp"/>
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>

@@ -5,10 +5,10 @@ import java.io.Serializable;
 public class Operation implements Serializable {
     private String date;
     private Double amount;
-    private int operationAccountNumber;
+    private String operationAccountNumber;
     private String choiceOperation;
 
-    public Operation(String date, Double amount, int operationAccountNumber, String choiceOperation) {
+    public Operation(String date, Double amount, String operationAccountNumber, String choiceOperation) {
         this.date = date;
         this.amount = amount;
         this.operationAccountNumber = operationAccountNumber;
@@ -33,11 +33,11 @@ public class Operation implements Serializable {
         this.amount = amount;
     }
 
-    public int getOperationAccountNumber() {
+    public String getOperationAccountNumber() {
         return operationAccountNumber;
     }
 
-    public void setOperationAccountNumber(int operationAccountNumber) {
+    public void setOperationAccountNumber(String operationAccountNumber) {
         this.operationAccountNumber = operationAccountNumber;
     }
 

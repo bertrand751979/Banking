@@ -3,7 +3,9 @@ package com.example.mybankapplication;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.mybankapplication.models.Choice;
 import com.example.mybankapplication.models.Customer;
+import com.example.mybankapplication.models.Operation;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -65,6 +67,45 @@ public class SharedPreferencesManager {
         return  booksList;
     }
 
+    public void saveOperation(List<Operation> books, String listKey) {
+        Gson gson = new Gson();
+        //gson.tojson qui transforme la liste en chaine de caractere
+        String booksAsString = gson.toJson(books);
+        save(listKey,booksAsString);
+    }
+
+    public List<Operation> getOperation(String listKey){
+        List<Operation> booksList = new ArrayList<>();
+        Gson gson = new Gson();
+        Operation[] books = gson.fromJson(get(listKey), Operation[].class);
+        if (books != null){
+            booksList = Arrays.asList(gson.fromJson(get(listKey), Operation[].class));
+        }
+        return  booksList;
+    }
+
+
+
+
+
+
+
+    public void saveChoice(List<Choice> books, String listKey) {
+        Gson gson = new Gson();
+        //gson.tojson qui transforme la liste en chaine de caractere
+        String booksAsString = gson.toJson(books);
+        save(listKey,booksAsString);
+    }
+
+    public List<Choice> getChoice(String listKey){
+        List<Choice> booksList = new ArrayList<>();
+        Gson gson = new Gson();
+        Choice[] books = gson.fromJson(get(listKey), Choice[].class);
+        if (books != null){
+            booksList = Arrays.asList(gson.fromJson(get(listKey), Choice[].class));
+        }
+        return  booksList;
+    }
     public void addCustomerToList(Customer customer, String listKey){
         ArrayList<Customer> books = new ArrayList<>(getCustomer(listKey));
         remove(listKey);

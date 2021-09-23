@@ -5,6 +5,16 @@
         android:icon="@drawable/ic_list"
         android:title="Liste Clients" />
     <item
+        android:id="@+id/nav_edit_spinner"
+        android:icon="@drawable/ic_spinner"
+        android:title="Edit Spinner" />
+
+    <item
+        android:id="@+id/nav_edit_operation"
+        android:icon="@drawable/ic_edit_operation"
+        android:title="Edit Operations" />
+
+    <item
         android:id="@+id/nav_operation_list"
         android:icon="@drawable/ic_money"
         android:title="Liste Operations" />
