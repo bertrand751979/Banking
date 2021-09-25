@@ -28,7 +28,6 @@ public class DisplayCustomerFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterCustomer customerAdapter;
     private ArrayList<Customer>myCustomerList=new ArrayList<>();
-    private FloatingActionButton fab;
 
 
     @Override
@@ -52,14 +51,7 @@ public class DisplayCustomerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myCustomerList=new ArrayList<Customer>(SharedPreferencesManager.getInstance(DisplayCustomerFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY));
         recyclerView=view.findViewById(R.id.recyclerViewListCustomers);
-        fab=view.findViewById(R.id.floating);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(DisplayCustomerFragment.this.getContext(), EditCustomerActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
         setViewItem();
 

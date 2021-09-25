@@ -6,12 +6,15 @@ public class Customer implements Serializable {
     private String customerName;
     private String customerSurname;
     private String customerAccountNumber;
+    private Double customerAmount;
 
-    public Customer(String customerName, String customerSurname, String customerAccountNumber) {
+    public Customer(String customerName, String customerSurname, String customerAccountNumber, Double customerAmount) {
         this.customerName = customerName;
         this.customerSurname = customerSurname;
         this.customerAccountNumber = customerAccountNumber;
+        this.customerAmount = customerAmount;
     }
+
     public Customer(){}
 
     public String getCustomerName() {
@@ -38,5 +41,11 @@ public class Customer implements Serializable {
         this.customerAccountNumber = customerAccountNumber;
     }
 
+    public Double getCustomerAmount() {
+        return customerAmount;
+    }
 
+    public void setCustomerAmount(Double customerAmount) {
+        this.customerAmount = customerAmount;
+    }
 }

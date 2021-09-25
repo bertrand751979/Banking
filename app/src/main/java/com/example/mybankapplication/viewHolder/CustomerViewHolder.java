@@ -14,12 +14,14 @@ public class CustomerViewHolder extends RecyclerView.ViewHolder {
     private TextView vhCustomerSurname;
     private TextView vhCustomerName;
     private TextView vhCustomerid;
+    private  TextView vhCustomerAmount;
 
     public CustomerViewHolder(@NonNull View view) {
         super(view);
         vhCustomerSurname=view.findViewById(R.id.rawCustomerSurname);
         vhCustomerName=view.findViewById(R.id.rawCustomerName);
         vhCustomerid=view.findViewById(R.id.rawCustomerID);
+        vhCustomerAmount=view.findViewById(R.id.rawCustomerAmount);
     }
 
     public TextView getVhCustomerSurname() {
@@ -46,9 +48,18 @@ public class CustomerViewHolder extends RecyclerView.ViewHolder {
         this.vhCustomerid = vhCustomerid;
     }
 
+    public TextView getVhCustomerAmount() {
+        return vhCustomerAmount;
+    }
+
+    public void setVhCustomerAmount(TextView vhCustomerAmount) {
+        this.vhCustomerAmount = vhCustomerAmount;
+    }
+
     public void bind(Customer customer){
         vhCustomerSurname.setText(customer.getCustomerSurname());
         vhCustomerName.setText(customer.getCustomerName());
         vhCustomerid.setText(customer.getCustomerAccountNumber());
+        vhCustomerAmount.setText(String.valueOf(customer.getCustomerAmount()));
     }
 }

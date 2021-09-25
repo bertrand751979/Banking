@@ -42,7 +42,7 @@ public class EditOperationFragment extends Fragment {
     private int selectedMonth=1;
     private int selectedDay=1;
     private String operationSelected;
-    private ArrayList<Operation>myOperationList=new ArrayList<>();
+    public static  ArrayList<Operation>myOperationList=new ArrayList<>();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

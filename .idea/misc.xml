@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/fragment_edit_operation.xml" value="0.11614583333333334" />
         <entry key="app/src/main/res/layout/fragment_list_customer.xml" value="0.11614583333333334" />
         <entry key="app/src/main/res/layout/fragment_list_operation.xml" value="0.11614583333333334" />
+        <entry key="app/src/main/res/layout/fragment_list_solde.xml" value="0.1" />
         <entry key="app/src/main/res/layout/inscription_customer.xml" value="0.125" />
         <entry key="app/src/main/res/layout/raw_customer.xml" value="0.25" />
         <entry key="app/src/main/res/layout/raw_operation.xml" value="0.11614583333333334" />

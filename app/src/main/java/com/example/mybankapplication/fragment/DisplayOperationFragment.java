@@ -2,6 +2,7 @@ package com.example.mybankapplication.fragment;
 
 import static com.example.mybankapplication.activities.MainActivity.MY_CHOICE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_OPERATION_KEY;
+import static com.example.mybankapplication.fragment.EditOperationFragment.myOperationList;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -51,13 +52,19 @@ public class DisplayOperationFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         recyclerView = view.findViewById(R.id.recyclerViewListOperation);
         setViewItem();
+        updateSolde();
     }
     private void setViewItem(){
         recyclerView.setLayoutManager(new LinearLayoutManager(DisplayOperationFragment.this.getContext()));
         operationAdapter=new AdapterOperation(myOperationList);
         recyclerView.setAdapter(operationAdapter);
     }
-
-
-
+    public void updateSolde() {
+        int count=0;
+        for (Operation operation : myOperationList) {
+            if (operation.getOperationAccountNumber().equalsIgnoreCase("RETRAIT")) {
+                count = count + 1;
+            }
+        }
+    }
 }
