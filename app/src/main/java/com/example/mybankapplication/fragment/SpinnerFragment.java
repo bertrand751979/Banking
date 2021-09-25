@@ -19,11 +19,11 @@ import com.example.mybankapplication.R;
 import com.example.mybankapplication.SharedPreferencesManager;
 import com.example.mybankapplication.adapter.AdapterChoice;
 import com.example.mybankapplication.models.Choice;
+import com.example.mybankapplication.repository.Repository;
 
 import java.util.ArrayList;
 
 public class SpinnerFragment extends Fragment {
-    private ArrayList<Choice>myChoiceList=new ArrayList<>();
     private EditText editSpinner;
     private Button btnSaveSpinnerChoice;
 
@@ -57,11 +57,7 @@ public class SpinnerFragment extends Fragment {
     }
 
     private void addSpinnerChoice(){
-        Choice choice=new Choice();
-        choice.setChoiceSerlected(editSpinner.getText().toString());
-        myChoiceList.add(choice);
-        SharedPreferencesManager.getInstance(SpinnerFragment.this.getContext()).saveChoice(myChoiceList, MY_CHOICE_KEY);
-        Toast.makeText(SpinnerFragment.this.getContext(), "la taille de la liste est:"+myChoiceList.size(), Toast.LENGTH_SHORT).show();
+        Repository.getInstance().spinnerPreference(SpinnerFragment.this.getContext(),editSpinner);
     }
 
 

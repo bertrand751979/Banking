@@ -57,13 +57,6 @@ public class SoldeFragment extends Fragment {
         recyclerView.setAdapter(soldeAdapter);
     }
 
-   /* Client client1 = maListeClient.get(0);
-    for (Client client : maListeClient) {
-        if (client.getTotalCommande() > client1.getTotalCommande()) {
-            client1 = client;
-        }
-    }
-    System.out.println("Le client " + client1.getNomClient() + " " + "a depense le plus gros montant en achet pizza son montantb est " + client1.getTotalCommande());*/
 
 
 

@@ -1,25 +1,31 @@
 package com.example.mybankapplication.repository;
 
+import static com.example.mybankapplication.activities.MainActivity.MY_CHOICE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
+import static com.example.mybankapplication.activities.MainActivity.MY_OPERATION_KEY;
 
 import android.content.Context;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybankapplication.SharedPreferencesManager;
+import com.example.mybankapplication.fragment.EditOperationFragment;
+import com.example.mybankapplication.fragment.SpinnerFragment;
 import com.example.mybankapplication.models.Choice;
 import com.example.mybankapplication.models.Customer;
 import com.example.mybankapplication.models.Operation;
 import com.example.mybankapplication.models.Solde;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Repository {
 
     private static Repository instance;
     private ArrayList<Choice> appChoiceList = new ArrayList<>();
     private ArrayList<Customer> appCustomerList = new ArrayList<>();
-    public ArrayList<Operation> appOperationGroupe = new ArrayList<>();
+    public ArrayList<Operation> appOperationList = new ArrayList<>();
     private ArrayList<Solde> appSoldeList = new ArrayList<>();
 
     private Repository() {
@@ -42,4 +48,28 @@ public class Repository {
         Toast.makeText(context,"La liste contient "+appCustomerList.size(),Toast.LENGTH_SHORT).show();
         SharedPreferencesManager.getInstance(context).saveCustomer(appCustomerList,MY_CUSTOMER_KEY);
     }
+
+    public void operationPreference(Context context,EditText operationAccountNumber,EditText amount, String operationSelected, TextView date){
+        Operation operation=new Operation();
+        operation.setOperationAccountNumber(operationAccountNumber.getText().toString());
+        operation.setAmount(Double.valueOf(amount.getText().toString()));
+        operation.setChoiceOperation(operationSelected);
+        operation.setDate(date.getText().toString());
+        appOperationList.add(operation);
+        SharedPreferencesManager.getInstance(context).saveOperation(appOperationList, MY_OPERATION_KEY);
+        Toast.makeText(context,"La taille de la liste est: "+appOperationList.size(),Toast.LENGTH_SHORT).show();
+    }
+
+    public void spinnerPreference(Context context, EditText editSpinner){
+        Choice choice=new Choice();
+        choice.setChoiceSerlected(editSpinner.getText().toString());
+        appChoiceList.add(choice);
+        SharedPreferencesManager.getInstance(context).saveChoice(appChoiceList, MY_CHOICE_KEY);
+        Toast.makeText(context, "la taille de la liste est:"+appChoiceList.size(), Toast.LENGTH_SHORT).show();
+    }
+    public List<Choice> getListChoice(Context context) {
+        List<Choice> listChoice=SharedPreferencesManager.getInstance(context).getChoice(MY_CHOICE_KEY);
+        return listChoice;
+    }
+
 }

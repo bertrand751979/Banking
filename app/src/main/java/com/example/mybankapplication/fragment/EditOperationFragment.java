@@ -27,6 +27,7 @@ import com.example.mybankapplication.R;
 import com.example.mybankapplication.SharedPreferencesManager;
 import com.example.mybankapplication.models.Choice;
 import com.example.mybankapplication.models.Operation;
+import com.example.mybankapplication.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,11 +87,9 @@ public class EditOperationFragment extends Fragment {
             }
         });
 
-        List<Choice> listRoom= SharedPreferencesManager.getInstance(EditOperationFragment.this.getContext()).getChoice(MY_CHOICE_KEY);
+        List<Choice> listChoice= Repository.getInstance().getListChoice(EditOperationFragment.this.getContext());
         Spinner spinner=view.findViewById(R.id.spinner1);
-        //1 ADapter,Layout et une list
-        ArrayAdapter<Choice> adapter = new ArrayAdapter<Choice>(EditOperationFragment.this.getContext(),android.R.layout.simple_spinner_item,listRoom);
-        //ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(this,R.array.room, android.R.layout.simple_spinner_item);
+        ArrayAdapter<Choice> adapter = new ArrayAdapter<Choice>(EditOperationFragment.this.getContext(),android.R.layout.simple_spinner_item,listChoice);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -109,14 +108,7 @@ public class EditOperationFragment extends Fragment {
     }
 
     private void addOperation(){
-        Operation operation=new Operation();
-        operation.setOperationAccountNumber(operationAccountNumber.getText().toString());
-        operation.setAmount(Double.valueOf(amount.getText().toString()));
-        operation.setChoiceOperation(operationSelected);
-        operation.setDate(date.getText().toString());
-        myOperationList.add(operation);
-        SharedPreferencesManager.getInstance(EditOperationFragment.this.getContext()).saveOperation(myOperationList, MY_OPERATION_KEY);
-        Toast.makeText(EditOperationFragment.this.getContext(),"La taille de la liste est: "+myOperationList.size(),Toast.LENGTH_SHORT).show();
+        Repository.getInstance().operationPreference(EditOperationFragment.this.getContext(),operationAccountNumber,amount,operationSelected,date);
     }
 
 
