@@ -2,6 +2,7 @@ package com.example.mybankapplication.fragment;
 
 import static android.content.ContentValues.TAG;
 import static com.example.mybankapplication.activities.MainActivity.MY_CHOICE_KEY;
+import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMERSOLDE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_OPERATION_KEY;
 import static com.example.mybankapplication.fragment.EditOperationFragment.myOperationList;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,6 +40,8 @@ public class DisplayOperationFragment extends Fragment {
     private AdapterOperation operationAdapter;
     private ArrayList<Operation> myOperationList=new ArrayList<>();
     private Button btnSolde;
+    double somme=0;
+    private ArrayList<Customer> myListSoldeCustomer=new ArrayList<>();
 
 
     @Override
@@ -62,7 +66,13 @@ public class DisplayOperationFragment extends Fragment {
         btnSolde.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+            Customer customer= new Customer();
+            customer.setCustomerName(customer.getCustomerName());
+            customer.setCustomerAmount(somme);
+            myListSoldeCustomer.add(customer);
+            SharedPreferencesManager.getInstance(DisplayOperationFragment.this.getContext()).saveCustomer(myListSoldeCustomer,MY_CUSTOMERSOLDE_KEY);
+                Toast.makeText(DisplayOperationFragment.this.getContext(),"la taille de la list est: "+
+                        myListSoldeCustomer.size(),Toast.LENGTH_SHORT).show();
             }
         });
         recyclerView = view.findViewById(R.id.recyclerViewListOperation);
@@ -75,24 +85,23 @@ public class DisplayOperationFragment extends Fragment {
         recyclerView.setAdapter(operationAdapter);
     }
     public void updateSolde() {
-        double sommeRetrait=0;
-        double sommeDepot=0;
+
         for (Customer customer : SharedPreferencesManager.getInstance
                 (DisplayOperationFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY)) {
             Log.i(TAG,"Le num de compte"+customer.getCustomerAccountNumber());
             for (Operation operation : SharedPreferencesManager.getInstance
                     (DisplayOperationFragment.this.getContext()).getOperation(MY_OPERATION_KEY)){
                 if (customer.getCustomerAccountNumber().equalsIgnoreCase(operation.getOperationAccountNumber())) {
-                    Log.i(TAG,"Operation du numero de compte"+operation.getOperationAccountNumber());
+                   // Log.i(TAG,"Operation du numero de compte"+operation.getOperationAccountNumber());
                     if(operation.getChoiceOperation().equalsIgnoreCase("Retrait")){
-                        sommeRetrait=customer.getCustomerAmount()-operation.getAmount();
-                        Log.i(TAG,"la somm est:"+sommeRetrait);
-                        customer.setCustomerAmount(sommeRetrait);
+                        somme=customer.getCustomerAmount()-operation.getAmount();
+                        Log.i(TAG,"la somm est:"+somme);
+                        customer.setCustomerAmount(somme);
                     }
                     if(operation.getChoiceOperation().equalsIgnoreCase("Depot")){
-                        sommeDepot=customer.getCustomerAmount()+operation.getAmount();
-                        Log.i(TAG,"la somm est:"+sommeDepot);
-                        customer.setCustomerAmount(sommeDepot);
+                        somme=customer.getCustomerAmount()+operation.getAmount();
+                        Log.i(TAG,"la somm est:"+somme);
+                        customer.setCustomerAmount(somme);
                     }
                 }
 

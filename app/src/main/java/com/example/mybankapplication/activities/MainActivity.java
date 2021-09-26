@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     public static String MY_CUSTOMER_KEY="myCustomerKeysss";
     public static String MY_CHOICE_KEY="myChoiceKeys";
     public static String MY_OPERATION_KEY="myOperationKeys";
-    public static String MY_SOLDE_KEY="mySoldeKey";
+    public static String MY_CUSTOMERSOLDE_KEY="myCustomerSoldeKey";
     private BottomNavigationView bottomNav;
     private FloatingActionButton fab;
 

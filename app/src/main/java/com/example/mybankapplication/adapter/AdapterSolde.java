@@ -26,7 +26,7 @@ public class AdapterSolde extends RecyclerView.Adapter<SoldeViewHolder> {
     @Override
     public SoldeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.raw_solde,parent,false);
+        View view=inflater.inflate(R.layout.raw_customer,parent,false);
         return new SoldeViewHolder(view);
     }
 
