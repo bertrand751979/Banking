@@ -8,7 +8,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewListOperation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="400dp"/>
+
+    <Button
+        android:id="@+id/btnCalculSolde"
+        android:layout_marginBottom="380dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="calcule"/>
 
 
 </RelativeLayout>
