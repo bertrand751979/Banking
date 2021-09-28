@@ -2,6 +2,7 @@ package com.example.mybankapplication.repository;
 
 import static android.content.ContentValues.TAG;
 import static com.example.mybankapplication.activities.MainActivity.MY_CHOICE_KEY;
+import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMERSOLDE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_OPERATION_KEY;
 
@@ -75,30 +76,36 @@ public class Repository {
         return listChoice;
     }
 
-    public void calculSolde(Context context, String accountNumber, Double resultat){
-        for (Customer customer : SharedPreferencesManager.getInstance(context).getCustomer(MY_CUSTOMER_KEY)) {
-            Log.i(TAG,"Le num de compte"+customer.getCustomerAccountNumber());
-            for (Operation operation : SharedPreferencesManager.getInstance(context).getOperation(MY_OPERATION_KEY)){
-                if (customer.getCustomerAccountNumber().equalsIgnoreCase(operation.getOperationAccountNumber())) {
-                     Log.i(TAG,"Operation du numero de compte"+operation.getOperationAccountNumber());
-                    accountNumber=operation.getOperationAccountNumber();
-                    if(operation.getChoiceOperation().equalsIgnoreCase("Retrait")){
-                        resultat=customer.getCustomerAmount()-operation.getAmount();
-                        Log.i(TAG,"la somm est:"+resultat);
-                        customer.setCustomerAmount(resultat);
-                    }
-                    if(operation.getChoiceOperation().equalsIgnoreCase("Depot")){
-                        resultat=customer.getCustomerAmount()+operation.getAmount();
-                        Log.i(TAG,"la somm est:"+resultat);
-                        customer.setCustomerAmount(resultat);
-                    }
-                }
-            }
-        }
-
+    public List<Operation>getListOperation(Context context){
+    List<Operation>listOperation=SharedPreferencesManager.getInstance(context).getOperation(MY_OPERATION_KEY);
+    return listOperation;
     }
 
+   public void updateSolde(List<Customer>list,Context context,String account, double result ){
+      // myListSoldeCustomer.clear();
+       list.clear();
+       for (Customer customer : SharedPreferencesManager.getInstance(context).getCustomer(MY_CUSTOMER_KEY)) {
+           for (Operation operation : SharedPreferencesManager.getInstance(context).getOperation(MY_OPERATION_KEY)){
+               if (customer.getCustomerAccountNumber().equalsIgnoreCase(operation.getOperationAccountNumber())) {
+                   account=operation.getOperationAccountNumber();
+                   if(operation.getChoiceOperation().equalsIgnoreCase("Retrait")){
+                       result=customer.getCustomerAmount()-operation.getAmount();
+                       Log.i(TAG,"la somm est:"+result);
+                       customer.setCustomerAmount(result);
+                   }
+                   if(operation.getChoiceOperation().equalsIgnoreCase("Depot")){
+                       result=customer.getCustomerAmount()+operation.getAmount();
+                       Log.i(TAG,"la somm est:"+result);
+                       customer.setCustomerAmount(result);
+                   }
+               }
+           }
+           list.add(customer);
+           Toast.makeText(context,"La taille de la liste"+list.size(),Toast.LENGTH_SHORT).show();
+       }
+       SharedPreferencesManager.getInstance(context).saveCustomer(list,MY_CUSTOMERSOLDE_KEY);
+   }
 
 
 
-}
+}//fin Repository

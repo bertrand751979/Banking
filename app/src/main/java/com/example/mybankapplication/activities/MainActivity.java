@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     public static String MY_OPERATION_KEY="myOperationKeys";
     public static String MY_CUSTOMERSOLDE_KEY="myCustomerSoldeKey";
     private BottomNavigationView bottomNav;
-    private FloatingActionButton fab;
 
     @Override
     protected void onResume() {
@@ -42,14 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         bottomNav=findViewById(R.id.bottom_nav);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
-        fab=findViewById(R.id.floating);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(MainActivity.this, EditCustomerActivity.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener = new BottomNavigationView.OnNavigationItemSelectedListener() {

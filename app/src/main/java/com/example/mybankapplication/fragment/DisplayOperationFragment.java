@@ -28,6 +28,7 @@ import com.example.mybankapplication.models.Operation;
 import com.example.mybankapplication.repository.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class DisplayOperationFragment extends Fragment {
     private RecyclerView recyclerView;
@@ -42,7 +43,6 @@ public class DisplayOperationFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Nullable
@@ -74,13 +74,12 @@ public class DisplayOperationFragment extends Fragment {
         recyclerView.setAdapter(operationAdapter);
     }
     public void updateSolde() {
-       for (Customer customer : SharedPreferencesManager.getInstance
-                (DisplayOperationFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY)) {
-           // Log.i(TAG,"Le num de compte"+customer.getCustomerAccountNumber());
-            for (Operation operation : SharedPreferencesManager.getInstance
-                    (DisplayOperationFragment.this.getContext()).getOperation(MY_OPERATION_KEY)){
+        Repository.getInstance().updateSolde(myListSoldeCustomer,DisplayOperationFragment.this.getContext(),accountNumber,somme);
+
+       /* myListSoldeCustomer.clear();
+        for (Customer customer : SharedPreferencesManager.getInstance(DisplayOperationFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY)) {
+            for (Operation operation : SharedPreferencesManager.getInstance(DisplayOperationFragment.this.getContext()).getOperation(MY_OPERATION_KEY)){
                 if (customer.getCustomerAccountNumber().equalsIgnoreCase(operation.getOperationAccountNumber())) {
-                   // Log.i(TAG,"Operation du numero de compte"+operation.getOperationAccountNumber());
                     accountNumber=operation.getOperationAccountNumber();
                     if(operation.getChoiceOperation().equalsIgnoreCase("Retrait")){
                         somme=customer.getCustomerAmount()-operation.getAmount();
@@ -93,12 +92,10 @@ public class DisplayOperationFragment extends Fragment {
                         customer.setCustomerAmount(somme);
                     }
                 }
-                myListSoldeCustomer.add(customer);
-
-
             }
-           SharedPreferencesManager.getInstance(DisplayOperationFragment.this.getContext()).saveCustomer(myListSoldeCustomer,MY_CUSTOMERSOLDE_KEY);
-
+            myListSoldeCustomer.add(customer);
+            Toast.makeText(DisplayOperationFragment.this.getContext(),"La taille de la liste"+myListSoldeCustomer.size(),Toast.LENGTH_SHORT).show();
        }
+        SharedPreferencesManager.getInstance(DisplayOperationFragment.this.getContext()).saveCustomer(myListSoldeCustomer,MY_CUSTOMERSOLDE_KEY);*/
     }//fin UpdateSolde()
 }//fin de Display

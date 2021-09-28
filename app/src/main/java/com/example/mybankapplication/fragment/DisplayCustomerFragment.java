@@ -20,6 +20,7 @@ import com.example.mybankapplication.activities.EditCustomerActivity;
 import com.example.mybankapplication.activities.MainActivity;
 import com.example.mybankapplication.adapter.AdapterCustomer;
 import com.example.mybankapplication.models.Customer;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -28,22 +29,18 @@ public class DisplayCustomerFragment extends Fragment {
     private RecyclerView recyclerView;
     private AdapterCustomer customerAdapter;
     private ArrayList<Customer>myCustomerList=new ArrayList<>();
-
+    private FloatingActionButton fab;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
-
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_list_customer,container,false);
-
     }
 
     @Override
@@ -51,7 +48,14 @@ public class DisplayCustomerFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myCustomerList=new ArrayList<Customer>(SharedPreferencesManager.getInstance(DisplayCustomerFragment.this.getContext()).getCustomer(MY_CUSTOMER_KEY));
         recyclerView=view.findViewById(R.id.recyclerViewListCustomers);
-
+        fab=view.findViewById(R.id.floating);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getContext(), EditCustomerActivity.class);
+                startActivity(intent);
+            }
+        });
 
         setViewItem();
 
@@ -60,8 +64,6 @@ public class DisplayCustomerFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(DisplayCustomerFragment.this.getContext()));
         customerAdapter=new AdapterCustomer(myCustomerList);
         recyclerView.setAdapter(customerAdapter);
-
-
     }
 
 }
