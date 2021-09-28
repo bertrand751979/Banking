@@ -1,15 +1,18 @@
 package com.example.mybankapplication.repository;
 
+import static android.content.ContentValues.TAG;
 import static com.example.mybankapplication.activities.MainActivity.MY_CHOICE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_OPERATION_KEY;
 
 import android.content.Context;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mybankapplication.SharedPreferencesManager;
+import com.example.mybankapplication.fragment.DisplayOperationFragment;
 import com.example.mybankapplication.fragment.EditOperationFragment;
 import com.example.mybankapplication.fragment.SpinnerFragment;
 import com.example.mybankapplication.models.Choice;
@@ -71,5 +74,31 @@ public class Repository {
         List<Choice> listChoice=SharedPreferencesManager.getInstance(context).getChoice(MY_CHOICE_KEY);
         return listChoice;
     }
+
+    public void calculSolde(Context context, String accountNumber, Double resultat){
+        for (Customer customer : SharedPreferencesManager.getInstance(context).getCustomer(MY_CUSTOMER_KEY)) {
+            Log.i(TAG,"Le num de compte"+customer.getCustomerAccountNumber());
+            for (Operation operation : SharedPreferencesManager.getInstance(context).getOperation(MY_OPERATION_KEY)){
+                if (customer.getCustomerAccountNumber().equalsIgnoreCase(operation.getOperationAccountNumber())) {
+                     Log.i(TAG,"Operation du numero de compte"+operation.getOperationAccountNumber());
+                    accountNumber=operation.getOperationAccountNumber();
+                    if(operation.getChoiceOperation().equalsIgnoreCase("Retrait")){
+                        resultat=customer.getCustomerAmount()-operation.getAmount();
+                        Log.i(TAG,"la somm est:"+resultat);
+                        customer.setCustomerAmount(resultat);
+                    }
+                    if(operation.getChoiceOperation().equalsIgnoreCase("Depot")){
+                        resultat=customer.getCustomerAmount()+operation.getAmount();
+                        Log.i(TAG,"la somm est:"+resultat);
+                        customer.setCustomerAmount(resultat);
+                    }
+                }
+            }
+        }
+
+    }
+
+
+
 
 }

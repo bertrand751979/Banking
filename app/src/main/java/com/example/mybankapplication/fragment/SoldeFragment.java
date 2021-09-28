@@ -1,17 +1,13 @@
 package com.example.mybankapplication.fragment;
 
-import static android.content.ContentValues.TAG;
 import static com.example.mybankapplication.activities.EditCustomerActivity.myCustomerList;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMERSOLDE_KEY;
 import static com.example.mybankapplication.activities.MainActivity.MY_CUSTOMER_KEY;
-import static com.example.mybankapplication.fragment.EditOperationFragment.myOperationList;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,10 +18,8 @@ import com.example.mybankapplication.R;
 import com.example.mybankapplication.SharedPreferencesManager;
 import com.example.mybankapplication.activities.EditCustomerActivity;
 import com.example.mybankapplication.adapter.AdapterCustomer;
-import com.example.mybankapplication.adapter.AdapterSolde;
 import com.example.mybankapplication.models.Customer;
-import com.example.mybankapplication.models.Operation;
-import com.example.mybankapplication.models.Solde;
+
 import java.util.ArrayList;
 
 public class SoldeFragment extends Fragment {
@@ -36,6 +30,7 @@ public class SoldeFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        myListSoldCustomer.clear();
     }
 
     @Nullable
@@ -43,8 +38,6 @@ public class SoldeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_list_customer,container,false);
-
-
     }
 
     @Override
@@ -58,7 +51,8 @@ public class SoldeFragment extends Fragment {
 
     private void setViewItem(){
         recyclerView.setLayoutManager(new LinearLayoutManager(SoldeFragment.this.getContext()));
-         customerAdapter=new AdapterCustomer(myListSoldCustomer);
+        customerAdapter=new AdapterCustomer(myCustomerList);
+        customerAdapter=new AdapterCustomer(myListSoldCustomer);
         recyclerView.setAdapter(customerAdapter);
     }
 
